@@ -124,7 +124,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Push to GitHub Container Registry
         run: |
-          FULL_IMAGE=ghcr.io/${{ github.repository }}
+          FULL_IMAGE=ghcr.io/$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           docker load -i image.tar
           docker tag $IMAGE_TAG $FULL_IMAGE:${{ github.sha }}
           docker tag $IMAGE_TAG $FULL_IMAGE:latest
